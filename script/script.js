@@ -38,22 +38,19 @@
         postImg : "https://picsum.photos/300/300",
         postLike : 10000
     }
- ]
- // stampo
+]
+// stampo
 // ! prendo l'elemento
- const target = document.getElementById("container");
-
-
-//funzione creazione del post 
+const target = document.getElementById("container");
 let prova = ``
-for(i = 0 ; 0 < posts.length ; i++){
+for(i = 0 ; i < posts.length ; i++){
     const app = posts[i];
     prova += `
     <div  class="post">
         <div class="post__header">
             <div class="post-meta">
                 <div class="post-meta__icon">
-                <img class="profile-pic" src="${app["profilePic"]}" alt="Phil Mangione" />
+                <img class="profile-pic" src="${app.profilePic}" alt="Phil Mangione" />
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${app.fullName}</div>
@@ -70,7 +67,7 @@ for(i = 0 ; 0 < posts.length ; i++){
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                <button class="like-button js-like-button" href="#" data-postid="1">
+                <button id="btn" class="like-button js-like-button" href="#" data-postid="1">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </button>
@@ -82,5 +79,17 @@ for(i = 0 ; 0 < posts.length ; i++){
 
     target.innerHTML = prova;
 }
+const btn = document.getElementsByClassName("like-button");
+const btnText = document.getElementsByClassName("like-button__label")
 
-//invoco la funzione in un ciclo
+let appo = 0;
+for (let i = 0; i < btn.length; i++) {
+    btn[i].addEventListener('click', function(){
+        let subject = this.classList;
+        subject.toggle("liked");
+        
+        posts[i].postLike++;
+        console.log(posts[i].postLike)
+    });
+}
+
